@@ -139,7 +139,7 @@ class MadMimi {
 	}
 	function AddUser($user, $return = false) {
 		$csv = $this->build_csv($user);
-		$this->Import($csv, $return);
+		return $this->Import($csv, $return);
 	}
 	function RemoveUser($email, $list_name, $return = false) {
 		$options = array('email' => $email) + $this->default_options();
