@@ -60,9 +60,6 @@ class MadMimi {
 		}
 		$ch = curl_init();
 		curl_setopt($ch, CURLOPT_URL, $url);
-		// Fix for OpenSSL bug (http://stackoverflow.com/questions/8619706/running-curl-with-openssl-0-9-8-against-openssl-1-0-0-server-causes-handshake-er)
-		// Disabled as fix for SSLv3 Poodle vulnerability (http://googleonlinesecurity.blogspot.co.uk/2014/10/this-poodle-bites-exploiting-ssl-30.html)
-		// curl_setopt($ch, CURLOPT_SSLVERSION, 3);
 		// Fix libcurl vs. apache2
 		curl_setopt($ch, CURLOPT_HTTPHEADER, array("Expect:"));
 		if ($return_status == true) {
@@ -76,10 +73,6 @@ class MadMimi {
 			case 'POST':
 				curl_setopt($ch, CURLOPT_POST, TRUE);
 				curl_setopt($ch, CURLOPT_POSTFIELDS, $request_options);
-				if (strstr($url, 'https')) {
-					curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
-					curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, FALSE);
-				}
 				break;
 		}
 		if ($this->debug == true) {
