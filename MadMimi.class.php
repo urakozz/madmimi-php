@@ -56,6 +56,7 @@ class MadMimi {
 		}
 		$ch = curl_init();
 		curl_setopt($ch, CURLOPT_URL, $url);
+		curl_setopt($ch, CURLOPT_SSL_CIPHER_LIST, 'TLSv1');
 		// Fix libcurl vs. apache2
 		curl_setopt($ch, CURLOPT_HTTPHEADER, array("Expect:"));
 		if ($return_status == true) {
